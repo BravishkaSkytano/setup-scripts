@@ -1,0 +1,40 @@
+#!/bin/bash
+
+echo "Installing Jekyll..."
+echo " "
+PS3="Choose your system: "
+
+select opt in Debian Fedora ArchLinux Cancel; do
+
+    case $opt in
+        Debian)
+            sudo apt-get install ruby-full build-essential;
+            break
+            ;;
+        Fedora)
+            sudo dnf install ruby ruby-devel openssl-devel redhat-rpm-config @development-tools;
+            break
+            ;;
+        ArchLinux)
+            sudo pacman -S ruby base-devel;
+            break
+            ;;
+        Cancel)
+            break
+            ;;
+        *)
+            echo "Invalid option $REPLY"
+            ;;
+    esac
+done
+
+echo '# Install Ruby Gems to ~/gems' >> ~/.bashrc
+echo 'export GEM_HOME="$HOME/gems"' >> ~/.bashrc
+echo 'export PATH="$HOME/gems/bin:$PATH"' >> ~/.bashrc
+source ~/.bashrc
+
+sleep 5
+
+gem install jekyll bundler
+
+echo "Done"

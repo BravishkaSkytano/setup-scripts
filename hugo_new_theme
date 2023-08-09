@@ -1,0 +1,10 @@
+#!/bin/bash
+
+# A simple bash script to help generate new themes for Hugo
+
+if [[ -z "$1" ]]; then
+    echo "You must supply a theme name, e.g."
+    echo "  ./hugo_new_theme cool-theme-name"
+else
+    hugo new theme "$1"
+fi
